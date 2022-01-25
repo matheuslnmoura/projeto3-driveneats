@@ -1,0 +1,144 @@
+html {
+    font-family: 'Roboto', sans-serif;
+}
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ccc;
+}
+
+.app-container {
+    width: 100vw;
+    max-width: 450px;
+    margin: auto;
+    height: 100vh;
+    background-color: #E5E5E5;
+    position: relative;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.app-container::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+}
+
+
+header {
+    background-color: #f00;
+    height: 92px;
+    width: 100%;
+    position: absolute;
+}
+
+header h1 {
+    font-family: 'Righteous', cursive;
+    font-weight: 400;
+    font-size: 44px;
+    color: #fff;
+    margin: 0px 0px 6px 21px;
+    padding-top: 12px;
+
+}
+
+header p {
+    font-weight: 400;
+    font-size: 18px;
+    color: #fff;
+    margin-left:21px;
+}
+
+section:first-of-type {
+    margin-top: 123px;
+}
+
+section {
+    margin:31px 0px 0px 21px  
+}
+
+section h2 {
+    font-family: 'Righteous', cursive;
+    font-weight: 400;
+    font-size: 26px;
+}
+
+.options {
+    width: 100%;
+    height: 216px;
+    margin-top: 17px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.options::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+}
+
+.item-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 172px;
+    padding: 18px 14px 14px 14px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    background-color: #fff;
+    border-radius: 9px;
+    box-shadow: 5px 5px 10px -4px rgb(0 0 0 / 25%);
+}
+
+.item-container img  {
+    width: 144px;
+    margin-bottom: 8px;
+}
+
+
+.item-container h4 {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.item-container p {
+    font-weight: 300;
+    font-size: 15px;
+    color: #a6a6a6;
+    margin-bottom: 8px;
+}
+
+.item-container h3 {
+    font-weight: 400;
+    font-size: 16px;
+
+}
+
+
+.lower-bar {
+    background-color: #fff;
+    height: 92px;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lower-bar button {
+    width: 364px;
+    height: 61px;
+    text-align: center;
+    border-radius: 50px;
+    background: #CBCBCB;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+    border: none;
+
+}
