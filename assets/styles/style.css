@@ -103,20 +103,20 @@ section h2 {
 .item-container h4 {
     font-weight: 700;
     font-size: 16px;
-    margin-bottom: 4px;
+    
 }
 
 .item-container p {
     font-weight: 300;
     font-size: 15px;
     color: #a6a6a6;
-    margin-bottom: 8px;
+    margin: 12px 0px;
+    line-height: 19px;
 }
 
 .item-container h3 {
-    font-weight: 400;
+    font-weight: 600;
     font-size: 16px;
-
 }
 
 
