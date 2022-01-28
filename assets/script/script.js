@@ -1,6 +1,6 @@
 
 
-
+let cart = [];
 
 
 
@@ -31,6 +31,9 @@ foodsJson.map((item, index) => {
 
     document.querySelector('.food-options .options').append(foodItem);
 
+
+
+   
 
 
 
@@ -83,10 +86,209 @@ dessertsJson.map((item, index) => {
 
 
 
-
 //-----------------Functions-----------------//
 
-document.querySelector('.item-container').addEventListener('click',function(){
-    document.querySelectorAll('.item-container').classList.remove('selected-border');
-    this.classList.add('selected-border');
+let foodContainer = Array.from(document.querySelectorAll('.food-options .options .item-container'));
+
+let drinkContainer = Array.from(document.querySelectorAll('.drink-options .options .item-container'));
+
+let dessertContainer = Array.from(document.querySelectorAll('.dessert-options .options .item-container'));
+
+let numberOfSelectedItems = 0
+
+
+foodContainer.map((item) => {
+    item.addEventListener('click',function(){
+
+        if (item.classList.contains('selected-border')) {
+            item.classList.remove('selected-border')
+            numberOfSelectedItems --;
+
+        } else if (document.querySelector('.food-options .options .item-container.selected-border')){
+            document.querySelector('.food-options .options .item-container.selected-border').classList.remove('selected-border');
+            item.classList.add('selected-border');
+            
+        } else {
+            item.classList.add('selected-border');
+            numberOfSelectedItems ++;
+        }
+
+        
+        
+
+
+        if (numberOfSelectedItems === 3) {
+            activateButton();
+
+        } else {
+            deactivateButton();
+        }
+
+
+    });
 });
+
+drinkContainer.map((item) => {
+    item.addEventListener('click',function(){
+
+        if (item.classList.contains('selected-border')) {
+            item.classList.remove('selected-border');
+            numberOfSelectedItems --;
+
+        } else if (document.querySelector('.drink-options .options .item-container.selected-border')){
+            document.querySelector('.drink-options .options .item-container.selected-border').classList.remove('selected-border');
+            item.classList.add('selected-border');
+
+            
+        } else {
+            item.classList.add('selected-border');
+            numberOfSelectedItems ++;
+        }
+
+
+        if (numberOfSelectedItems === 3) {
+            activateButton();
+
+        } else {
+            deactivateButton();
+        }
+
+        
+    });
+});
+
+dessertContainer.map((item) => {
+    item.addEventListener('click',function(){
+
+        if (item.classList.contains('selected-border')) {
+            item.classList.remove('selected-border');
+            numberOfSelectedItems --;
+
+        } else if (document.querySelector('.dessert-options .options .item-container.selected-border')){
+            document.querySelector('.dessert-options .options .item-container.selected-border').classList.remove('selected-border');
+            item.classList.add('selected-border');
+            
+        } else {
+            item.classList.add('selected-border');
+            numberOfSelectedItems ++;
+        }
+
+
+
+        if (numberOfSelectedItems === 3) {
+            activateButton();
+
+        } else {
+            deactivateButton();
+        }
+
+    });
+});
+
+
+
+
+
+
+
+
+function activateButton() {
+
+    document.querySelector('.lower-bar button').innerHTML = 'Fechar pedido';
+    document.querySelector('.lower-bar button').style.backgroundColor = '#32B72F';
+    document.querySelector('.lower-bar button').classList.add('active')
+    
+
+}
+
+function deactivateButton() {
+    document.querySelector('.lower-bar button').innerHTML = 'Selecione os 3 itens<br>para fechar o pedido';
+    document.querySelector('.lower-bar button').style.backgroundColor = '#CBCBCB';
+    document.querySelector('.lower-bar button').classList.remove('active')
+}
+
+
+
+
+
+function modalPopUp() {
+    let chosenItems = Array.from(document.querySelectorAll('.app-container .selected-border'));
+
+    chosenItems.map((item, index) => {
+        cart.push(item.getAttribute('data-key'));
+        
+    });
+
+    document.querySelector('.modal-container').classList.remove('no-display');
+
+    let foodPrice = parseFloat(foodsJson[cart[0]].price);
+    let drinkPrice = parseFloat(drinksJson[cart[1]].price);
+    let dessertPrice = parseFloat(dessertsJson[cart[2]].price);
+
+
+    document.querySelector('.modal-container .modal .product-line.food .item').innerHTML = foodsJson[cart[0]].name;
+    document.querySelector('.modal-container .modal .product-line.food .price').innerHTML = foodPrice.toLocaleString('pt-br',{ minimumFractionDigits: 2, maximumFractionDigits: 2 });;
+
+    document.querySelector('.modal-container .modal .product-line.drink .item').innerHTML = drinksJson[cart[1]].name;
+    document.querySelector('.modal-container .modal .product-line.drink .price').innerHTML = drinkPrice.toLocaleString('pt-br',{ minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    document.querySelector('.modal-container .modal .product-line.dessert .item').innerHTML = dessertsJson[cart[2]].name;
+    document.querySelector('.modal-container .modal .product-line.dessert .price').innerHTML = dessertPrice.toLocaleString('pt-br',{ minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+
+    let total = foodPrice + drinkPrice + dessertPrice;
+
+    document.querySelector('.modal-container .modal .product-line.total .price').innerHTML = total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+
+
+}
+
+
+function activateAddressPrompt() {
+    let userAddress = prompt('Digite seu Endereço');
+    // window.open('https://careerkarma.com/blog/javascript-go-to-url/', '_blank');
+
+    let foodPrice = parseFloat(foodsJson[cart[0]].price);
+    let drinkPrice = parseFloat(drinksJson[cart[1]].price);
+    let dessertPrice = parseFloat(dessertsJson[cart[2]].price);
+
+    let total = foodPrice + drinkPrice + dessertPrice;
+
+    total = total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+
+
+    let clientOrder = `Olá, gostaria de fazer o *pedido* \n\n\n- *Prato*: ${foodsJson[cart[0]].name} \n\n\n- *Bebida*: ${drinksJson[cart[1]].name}  \n\n\n- *Sobremesa*: ${dessertsJson[cart[2]].name} \n\n\n*Total*: R$ *${total}*\n\n\n*Endereço de entrega*: ${userAddress}`;
+
+    let encodedOrder = encodeURIComponent(clientOrder);
+ 
+    window.open(`https://wa.me/5521964970146?text=${encodedOrder}`, '_blank');
+}
+
+function closeModal() {
+    document.querySelector('.modal-container').classList.add('no-display');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//-----------------Events-----------------//
+
+
+document.querySelector('.lower-bar button').addEventListener("click", () => {
+    if(document.querySelector('.lower-bar button').classList.contains('active')) {
+        modalPopUp();
+    }
+});
+
+document.querySelector('.modal button:nth-last-child(2)').addEventListener("click", activateAddressPrompt);
+
+document.querySelector('.modal .cancel').addEventListener("click", closeModal);
+

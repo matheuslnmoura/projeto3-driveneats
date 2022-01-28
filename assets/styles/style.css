@@ -163,9 +163,6 @@ section:last-of-type {
     border: none;
 }
 
-.lower-bar button:hover {
-    background-color: #ff0;
-}
 
 
 .modal-container {
