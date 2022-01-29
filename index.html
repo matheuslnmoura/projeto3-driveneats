@@ -13,43 +13,40 @@
 </head>
 <body>
 
-    <div class="models no-display">
-        <div class="item-container">
-            <div class="img"></div>
-            <h4>--</h4>
-            <p>--</p>
-            <h3>--</h3>
-        </div>
-    </div>
-
-
     <div class="app-container">
         <header>
             <h1>DrivenEats</h1>
             <p>Sua comida em 6 minutos</p>
         </header>
 
+        <section class="food-options">
 
-      
-            <section class="food-options">
-                <h2>Primeiro, seu prato</h2>
-                <div class="options">
-
-
+            <h2>Primeiro, seu prato</h2>
+            <div class="options">
+                <div class="models no-display">
+                    <div class="item-container">
+                        <div class="img"></div>
+                        <h4>--</h4>
+                        <p>--</p>
+                        <h3>--</h3>
+                        <ion-icon name="checkmark-circle" class="checkmark no-display"></ion-icon>
+                    </div>  
                 </div>
-            </section>
-            <section class="drink-options">
-                <h2>Agora, sua bebida</h2>
-                <div class="options">
 
-                </div>
-            </section>
-            <section class="dessert-options">
-                <h2>Por fim, sua sobremesa</h2>
-                <div class="options">
+            </div>
+        </section>
+        <section class="drink-options">
+            <h2>Agora, sua bebida</h2>
+            <div class="options">
 
-                </div>
-            </section>
+            </div>
+        </section>
+        <section class="dessert-options">
+            <h2>Por fim, sua sobremesa</h2>
+            <div class="options">
+
+            </div>
+        </section>
         
 
         <div class="lower-bar">
@@ -80,6 +77,20 @@
                     <span class="price">R$ 27,90</span>
                 </div>
 
+                <div class="client-info">
+                    <div class="name-area">
+                        <div class="text">Cliente: </div>
+                        <div class="name">Matheus Moura</div>
+                    </div>
+
+                    <div class="address-area">
+                        <div class="text">Endereço: </div>
+                        <div class="name">Rua Cachambi, 298 apto 102 - Cachambi - Rio de Janeiro, RJ. CEP> 20775-182</div>
+                    </div>
+
+                    
+                </div>
+
                 <button>Tudo certo, pode pedir!</button>
 
                 <button class="cancel">Cancelar</button>
@@ -90,7 +101,8 @@
     </div>
 
 
-
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="assets/script/menu.js"></script>
 <script src="assets/script/script.js"></script>
 

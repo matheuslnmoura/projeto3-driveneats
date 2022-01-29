@@ -2,6 +2,9 @@
 
 let cart = [];
 
+let userName = null;
+let userAddress = null;
+
 
 
 //-----------------Interface-----------------//
@@ -49,6 +52,7 @@ drinksJson.map((item, index) => {
     drinkItem.setAttribute('data-identifier', 'food-option');
     drinkItem.querySelector('.item-container h4').setAttribute('data-identifier', 'food-title');
     drinkItem.querySelector('.item-container h3').setAttribute('data-identifier', 'food-price');
+    
 
     drinkItem.querySelector('.item-container .img').style.backgroundImage = `url('${item.img}')`;
     drinkItem.querySelector('.item-container h4').innerHTML = item.name;
@@ -101,20 +105,21 @@ foodContainer.map((item) => {
     item.addEventListener('click',function(){
 
         if (item.classList.contains('selected-border')) {
-            item.classList.remove('selected-border')
+            item.querySelector('.checkmark').classList.add('no-display')
+            item.classList.remove('selected-border');
             numberOfSelectedItems --;
 
         } else if (document.querySelector('.food-options .options .item-container.selected-border')){
+            document.querySelector('.food-options .options .item-container.selected-border .checkmark').classList.add('no-display');
             document.querySelector('.food-options .options .item-container.selected-border').classList.remove('selected-border');
             item.classList.add('selected-border');
+            item.querySelector('.no-display').classList.remove('no-display');
             
         } else {
             item.classList.add('selected-border');
+            item.querySelector('.no-display').classList.remove('no-display');
             numberOfSelectedItems ++;
         }
-
-        
-        
 
 
         if (numberOfSelectedItems === 3) {
@@ -132,16 +137,19 @@ drinkContainer.map((item) => {
     item.addEventListener('click',function(){
 
         if (item.classList.contains('selected-border')) {
+            item.querySelector('.checkmark').classList.add('no-display')
             item.classList.remove('selected-border');
             numberOfSelectedItems --;
 
         } else if (document.querySelector('.drink-options .options .item-container.selected-border')){
+            document.querySelector('.drink-options .options .item-container.selected-border .checkmark').classList.add('no-display');
             document.querySelector('.drink-options .options .item-container.selected-border').classList.remove('selected-border');
             item.classList.add('selected-border');
+            item.querySelector('.no-display').classList.remove('no-display');
 
-            
         } else {
             item.classList.add('selected-border');
+            item.querySelector('.no-display').classList.remove('no-display');
             numberOfSelectedItems ++;
         }
 
@@ -161,16 +169,21 @@ dessertContainer.map((item) => {
     item.addEventListener('click',function(){
 
         if (item.classList.contains('selected-border')) {
+            item.querySelector('.checkmark').classList.add('no-display')
             item.classList.remove('selected-border');
             numberOfSelectedItems --;
 
         } else if (document.querySelector('.dessert-options .options .item-container.selected-border')){
+            document.querySelector('.dessert-options .options .item-container.selected-border .checkmark').classList.add('no-display');
             document.querySelector('.dessert-options .options .item-container.selected-border').classList.remove('selected-border');
             item.classList.add('selected-border');
+            item.querySelector('.no-display').classList.remove('no-display');
             
         } else {
             item.classList.add('selected-border');
+            item.querySelector('.no-display').classList.remove('no-display');
             numberOfSelectedItems ++;
+
         }
 
 
@@ -196,9 +209,7 @@ function activateButton() {
 
     document.querySelector('.lower-bar button').innerHTML = 'Fechar pedido';
     document.querySelector('.lower-bar button').style.backgroundColor = '#32B72F';
-    document.querySelector('.lower-bar button').classList.add('active')
-    
-
+    document.querySelector('.lower-bar button').classList.add('active');
 }
 
 function deactivateButton() {
@@ -212,6 +223,9 @@ function deactivateButton() {
 
 
 function modalPopUp() {
+    userName = prompt('Digite seu Nome');
+    userAddress = prompt('Digite seu Endereço');
+
     let chosenItems = Array.from(document.querySelectorAll('.app-container .selected-border'));
 
     chosenItems.map((item, index) => {
@@ -240,13 +254,12 @@ function modalPopUp() {
 
     document.querySelector('.modal-container .modal .product-line.total .price').innerHTML = total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 
-
+    document.querySelector ('.client-info .name-area .name').innerHTML = userName;
+    document.querySelector ('.client-info .address-area .name').innerHTML = userAddress;
 }
 
 
-function activateAddressPrompt() {
-    let userAddress = prompt('Digite seu Endereço');
-    // window.open('https://careerkarma.com/blog/javascript-go-to-url/', '_blank');
+function concludeOrder() {
 
     let foodPrice = parseFloat(foodsJson[cart[0]].price);
     let drinkPrice = parseFloat(drinksJson[cart[1]].price);
@@ -257,7 +270,7 @@ function activateAddressPrompt() {
     total = total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 
 
-    let clientOrder = `Olá, gostaria de fazer o *pedido* \n\n\n- *Prato*: ${foodsJson[cart[0]].name} \n\n\n- *Bebida*: ${drinksJson[cart[1]].name}  \n\n\n- *Sobremesa*: ${dessertsJson[cart[2]].name} \n\n\n*Total*: R$ *${total}*\n\n\n*Endereço de entrega*: ${userAddress}`;
+    let clientOrder = `Olá, gostaria de fazer o *pedido* \n\n\n- *Prato*: ${foodsJson[cart[0]].name} \n\n\n- *Bebida*: ${drinksJson[cart[1]].name}  \n\n\n- *Sobremesa*: ${dessertsJson[cart[2]].name} \n\n\n*Total*: *${total}* \n\n\n*Nome do Cliente*: ${userName} \n\n\n*Endereço de entrega*: ${userAddress}`;
 
     let encodedOrder = encodeURIComponent(clientOrder);
  
@@ -288,7 +301,7 @@ document.querySelector('.lower-bar button').addEventListener("click", () => {
     }
 });
 
-document.querySelector('.modal button:nth-last-child(2)').addEventListener("click", activateAddressPrompt);
+document.querySelector('.modal button:nth-last-child(2)').addEventListener("click", concludeOrder);
 
 document.querySelector('.modal .cancel').addEventListener("click", closeModal);
 
